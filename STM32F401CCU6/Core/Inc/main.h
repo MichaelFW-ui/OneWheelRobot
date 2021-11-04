@@ -58,6 +58,63 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define TIM2_EncodeManually 1
+#define TIM10_period 1
+#define Uart1_Debug 1
+#define Uart2_ESP32 1
+#define I2C1_MPU 1
+#define TIM5_PWMGenerate 1
+#define SPI1_NRF 1
+#define Motor_UpperPWMCH1_Pin GPIO_PIN_0
+#define Motor_UpperPWMCH1_GPIO_Port GPIOA
+#define Motor_LowerPWMCH2_Pin GPIO_PIN_1
+#define Motor_LowerPWMCH2_GPIO_Port GPIOA
+#define ESP_UART_TX_Pin GPIO_PIN_2
+#define ESP_UART_TX_GPIO_Port GPIOA
+#define ESP_UART_RX_Pin GPIO_PIN_3
+#define ESP_UART_RX_GPIO_Port GPIOA
+#define NRF_SCK_Pin GPIO_PIN_5
+#define NRF_SCK_GPIO_Port GPIOA
+#define NRF_MISO_Pin GPIO_PIN_6
+#define NRF_MISO_GPIO_Port GPIOA
+#define NRF_MOSI_Pin GPIO_PIN_7
+#define NRF_MOSI_GPIO_Port GPIOA
+#define NRF_CE_Pin GPIO_PIN_0
+#define NRF_CE_GPIO_Port GPIOB
+#define NRF_CSN_Pin GPIO_PIN_1
+#define NRF_CSN_GPIO_Port GPIOB
+#define NRF_IRQ_Pin GPIO_PIN_10
+#define NRF_IRQ_GPIO_Port GPIOB
+#define Motor_AIN2_Pin GPIO_PIN_12
+#define Motor_AIN2_GPIO_Port GPIOB
+#define Motor_AIN1_Pin GPIO_PIN_13
+#define Motor_AIN1_GPIO_Port GPIOB
+#define Motor_BIN1_Pin GPIO_PIN_14
+#define Motor_BIN1_GPIO_Port GPIOB
+#define Motor_BIN2_Pin GPIO_PIN_15
+#define Motor_BIN2_GPIO_Port GPIOB
+#define Motor_STBY_Pin GPIO_PIN_8
+#define Motor_STBY_GPIO_Port GPIOA
+#define Debug_TX_Pin GPIO_PIN_9
+#define Debug_TX_GPIO_Port GPIOA
+#define Debug_RX_Pin GPIO_PIN_10
+#define Debug_RX_GPIO_Port GPIOA
+#define Encoder_Upper_Pin GPIO_PIN_15
+#define Encoder_Upper_GPIO_Port GPIOA
+#define Encoder_Lower_Pin GPIO_PIN_3
+#define Encoder_Lower_GPIO_Port GPIOB
+#define MPU_AD0_Pin GPIO_PIN_4
+#define MPU_AD0_GPIO_Port GPIOB
+#define MPU_INT_Pin GPIO_PIN_5
+#define MPU_INT_GPIO_Port GPIOB
+#define MPU_SCL_Pin GPIO_PIN_6
+#define MPU_SCL_GPIO_Port GPIOB
+#define MPU_SDA_Pin GPIO_PIN_7
+#define MPU_SDA_GPIO_Port GPIOB
+#define Encoder_LowerSub_Pin GPIO_PIN_8
+#define Encoder_LowerSub_GPIO_Port GPIOB
+#define Encoder_UpperSub_Pin GPIO_PIN_9
+#define Encoder_UpperSub_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

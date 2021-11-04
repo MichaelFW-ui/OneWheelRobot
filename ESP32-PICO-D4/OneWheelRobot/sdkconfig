@@ -1122,6 +1122,31 @@ CONFIG_WPA_MBEDTLS_CRYPTO=y
 # CONFIG_WPA_WPS_STRICT is not set
 # CONFIG_WPA_11KV_SUPPORT is not set
 # end of Supplicant
+
+#
+# Displaying items on OLCD
+#
+
+#
+# Displaying LCD SPI configuration
+#
+CONFIG_LCD_SPI_PORT2_ENABLE=y
+# CONFIG_LCD_SPI_PORT3_ENALBE is not set
+# CONFIG_LCD_SPI_PORT_NONE is not set
+CONFIG_LCD_SPI_CS=15
+CONFIG_LCD_SPI_SCK=14
+CONFIG_LCD_SPI_MOSI=13
+CONFIG_LCD_SPI_MISO=12
+# end of Displaying LCD SPI configuration
+
+#
+# Displaying LCD Pinmap configuration
+#
+CONFIG_LCD_DC_PINMAP=34
+CONFIG_LCD_RES_PINMAP=35
+CONFIG_LCD_BLK_PINMAP=27
+# end of Displaying LCD Pinmap configuration
+# end of Displaying items on OLCD
 # end of Component config
 
 #

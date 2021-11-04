@@ -1,0 +1,57 @@
+menu "Displaying items on OLCD"
+
+    menu "Displaying LCD SPI configuration"
+
+        choice
+            prompt "LCD SPI port"
+            default LCD_SPI_PORT2_ENABLE
+            
+            config LCD_SPI_PORT2_ENABLE
+                bool "SPI port 2 enable"
+            config LCD_SPI_PORT3_ENALBE
+                bool "SPI port 3 enable"
+            config LCD_SPI_PORT_NONE
+                bool "Not enable all"
+                help
+                    Choose the port of SPI you would like to use.
+                    Notice that SPI 2 is connect to the pins naturally.
+        endchoice
+
+        config LCD_SPI_CS
+            int
+            default 15 if LCD_SPI_PORT2_ENABLE
+            default 5 if LCD_SPI_PORT3_ENALBE
+        config LCD_SPI_SCK
+            int
+            default 14 if LCD_SPI_PORT2_ENABLE
+            default 18 if LCD_SPI_PORT3_ENALBE
+        config LCD_SPI_MOSI
+            int
+            default 13 if LCD_SPI_PORT2_ENABLE
+            default 23 if LCD_SPI_PORT3_ENALBE
+        config LCD_SPI_MISO
+            int
+            default 12 if LCD_SPI_PORT2_ENABLE
+            default 19 if LCD_SPI_PORT3_ENALBE
+
+    endmenu
+
+    menu "Displaying LCD Pinmap configuration"
+
+        comment "Default pins are attached to the Pins naturally."
+
+        config LCD_DC_PINMAP
+            int "DC pin map"
+            range 0 35
+            default 34
+        config LCD_RES_PINMAP
+            int "RES pin map"
+            range 0 35
+            default 35
+        config LCD_BLK_PINMAP
+            int "BLK pin map"
+            range 0 35
+            default 27
+
+    endmenu
+endmenu
