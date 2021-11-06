@@ -19,8 +19,7 @@ menu "Displaying items on OLCD"
 
         config LCD_SPI_CS
             int
-            default 15 if LCD_SPI_PORT2_ENABLE
-            default 5 if LCD_SPI_PORT3_ENALBE
+            default 35
         config LCD_SPI_SCK
             int
             default 14 if LCD_SPI_PORT2_ENABLE
@@ -43,15 +42,15 @@ menu "Displaying items on OLCD"
         config LCD_DC_PINMAP
             int "DC pin map"
             range 0 35
-            default 34
+            default 32
         config LCD_RES_PINMAP
             int "RES pin map"
             range 0 35
-            default 35
+            default 33
         config LCD_BLK_PINMAP
             int "BLK pin map"
             range 0 35
-            default 27
+            default 34
 
     endmenu
 endmenu

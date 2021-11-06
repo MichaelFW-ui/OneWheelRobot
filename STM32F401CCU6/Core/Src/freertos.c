@@ -26,6 +26,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "main_.h"
+#include "debug.h"
 
 /* USER CODE END Includes */
 
@@ -49,6 +51,7 @@
 
 /* USER CODE END Variables */
 osThreadId MainMotionTaskHandle;
+osThreadId CommandReceiveHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -56,7 +59,9 @@ osThreadId MainMotionTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartMainTask(void const * argument);
+void StartReceiving(void const * argument);
 
+extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -106,6 +111,10 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(MainMotionTask, StartMainTask, osPriorityNormal, 0, 128);
   MainMotionTaskHandle = osThreadCreate(osThread(MainMotionTask), NULL);
 
+  /* definition and creation of CommandReceive */
+  osThreadDef(CommandReceive, StartReceiving, osPriorityIdle, 0, 128);
+  CommandReceiveHandle = osThreadCreate(osThread(CommandReceive), NULL);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -121,13 +130,35 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartMainTask */
 void StartMainTask(void const * argument)
 {
+  /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartMainTask */
+  Main_Process();
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
   /* USER CODE END StartMainTask */
+}
+
+/* USER CODE BEGIN Header_StartReceiving */
+/**
+* @brief Function implementing the CommandReceive thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartReceiving */
+void StartReceiving(void const * argument)
+{
+  /* USER CODE BEGIN StartReceiving */
+  Debug_Main();
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartReceiving */
 }
 
 /* Private application code --------------------------------------------------*/

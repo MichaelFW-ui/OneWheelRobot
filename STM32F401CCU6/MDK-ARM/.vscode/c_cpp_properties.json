@@ -12,6 +12,11 @@
                 "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
                 "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Drivers\\CMSIS\\Include",
                 "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\User\\Inc",
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\USB_DEVICE\\App",
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\USB_DEVICE\\Target",
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Middlewares\\ST\\STM32_USB_Device_Library\\Core\\Inc",
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Middlewares\\ST\\STM32_USB_Device_Library\\Class\\CDC\\Inc",
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\User\\dmp",
                 "E:\\Keil_v5\\ARM\\ARMCC\\include",
                 "E:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
                 "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\MDK-ARM",
@@ -19,7 +24,9 @@
                 "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Drivers\\STM32F4xx_HAL_Driver\\Src",
                 "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Middlewares\\Third_Party\\FreeRTOS\\Source",
                 "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Middlewares\\Third_Party\\FreeRTOS\\Source\\portable\\MemMang",
-                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\User\\Src"
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\User\\Src",
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Middlewares\\ST\\STM32_USB_Device_Library\\Core\\Src",
+                "d:\\Embed\\ROBOT\\CODE\\OneWheelRobot\\STM32F401CCU6\\Middlewares\\ST\\STM32_USB_Device_Library\\Class\\CDC\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

@@ -50,33 +50,46 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, NRF_CE_Pin|NRF_CSN_Pin|Motor_AIN2_Pin|Motor_AIN1_Pin
-                          |Motor_BIN1_Pin|Motor_BIN2_Pin|MPU_AD0_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, ESP_EN_Pin|Motor_AIN2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(Motor_STBY_GPIO_Port, Motor_STBY_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, NRF_CE_Pin|NRF_CSN_Pin|Motor_BIN2_Pin|Motor_BIN1_Pin
+                          |Motor_STBY_Pin|Motor_AIN1_Pin|MPU_AD0_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = NRF_IRQ_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(NRF_IRQ_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = ESP_EN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(ESP_EN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PBPin PBPin PBPin PBPin
                            PBPin PBPin PBPin */
-  GPIO_InitStruct.Pin = NRF_CE_Pin|NRF_CSN_Pin|Motor_AIN2_Pin|Motor_AIN1_Pin
-                          |Motor_BIN1_Pin|Motor_BIN2_Pin|MPU_AD0_Pin;
+  GPIO_InitStruct.Pin = NRF_CE_Pin|NRF_CSN_Pin|Motor_BIN2_Pin|Motor_BIN1_Pin
+                          |Motor_STBY_Pin|Motor_AIN1_Pin|MPU_AD0_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PBPin PBPin PBPin PBPin */
-  GPIO_InitStruct.Pin = NRF_IRQ_Pin|MPU_INT_Pin|Encoder_LowerSub_Pin|Encoder_UpperSub_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = Motor_STBY_Pin;
+  GPIO_InitStruct.Pin = Motor_AIN2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(Motor_STBY_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(Motor_AIN2_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PBPin PBPin PBPin */
+  GPIO_InitStruct.Pin = MPU_INT_Pin|Encoder_LowerSub_Pin|Encoder_UpperSub_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 

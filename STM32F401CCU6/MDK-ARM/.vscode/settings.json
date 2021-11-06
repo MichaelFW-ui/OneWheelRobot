@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "main_.h": "c",
+        "usb_otg.h": "c",
+        "usbd_cdc_if.h": "c",
+        "debug.h": "c",
+        "stm32f4xx.h": "c",
+        "mpu6050.h": "c",
+        "i2c.h": "c"
+    }
+}
