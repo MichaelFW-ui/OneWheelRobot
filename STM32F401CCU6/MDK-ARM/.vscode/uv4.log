@@ -1,32 +1,8 @@
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'OneWheelRobot'
-compiling inv_mpu_dmp_motion_driver.c...
-..\User\dmp\inv_mpu.h(44): error:  #169: expected a declaration
-  };
-..\User\dmp\inv_mpu_dmp_motion_driver.c(77): error:  #35: #error directive: Gyro driver is missing the system layer implementations.
-  #error  Gyro driver is missing the system layer implementations.
-..\User\dmp\inv_mpu_dmp_motion_driver.c: 0 warnings, 2 errors
-compiling inv_mpu.c...
-..\User\dmp\inv_mpu.h(44): error:  #169: expected a declaration
-  };
-..\User\dmp\inv_mpu.c(693): warning:  #223-D: function "usb_printf" declared implicitly
-          log_i("%#5x: %#5x\r\n", ii, data);
-..\User\dmp\inv_mpu.c(693): error:  #18: expected a ")"
-          log_i("%#5x: %#5x\r\n", ii, data);
-..\User\dmp\inv_mpu.c(693): error:  #109: expression preceding parentheses of apparent call must have (pointer-to-) function type
-          log_i("%#5x: %#5x\r\n", ii, data);
-..\User\dmp\inv_mpu.c(789): warning:  #223-D: function "reg_int_cb" declared implicitly
-          reg_int_cb(int_param);
-..\User\dmp\inv_mpu.c(918): error:  #140: too many arguments in function call
-          get_ms(timestamp);
-..\User\dmp\inv_mpu.c(941): error:  #140: too many arguments in function call
-          get_ms(timestamp);
-..\User\dmp\inv_mpu.c(963): error:  #140: too many arguments in function call
-          get_ms(timestamp);
-..\User\dmp\inv_mpu.c(1784): error:  #140: too many arguments in function call
-      get_ms((unsigned long*)timestamp);
-..\User\dmp\inv_mpu.c: 2 warnings, 7 errors
 compiling mpu6050.c...
-"OneWheelRobot\OneWheelRobot.axf" - 9 Error(s), 2 Warning(s).
-Target not created.
+linking...
+Program Size: Code=20948 RO-data=548 RW-data=512 ZI-data=24704  
+FromELF: creating hex file...
+"OneWheelRobot\OneWheelRobot.axf" - 0 Error(s), 0 Warning(s).
 Build Time Elapsed:  00:00:02

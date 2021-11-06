@@ -19,6 +19,10 @@ void Debug_Main(void) {
     }
 }
 
+void Debug_Init(void) {
+    return;
+}
+
 HAL_StatusTypeDef Debug_ProcessCommand(uint8_t *cmd) {
     switch (cmd[0]) {
         default:

@@ -23,6 +23,7 @@
 #include "inv_mpu_dmp_motion_driver.h"
 #include "dmpKey.h"
 #include "dmpmap.h"
+#include "mpu6050.h"
 
 
 /* The following functions must be defined for this platform:
@@ -52,13 +53,15 @@
 #define log_e(...)     do {} while (0)
 
 #elif defined EMPL_TARGET_MSP430
-#include "msp430.h"
-#include "msp430_clock.h"
-#include "log.h"
-#define delay_ms    msp430_delay_ms
-#define get_ms      msp430_get_clock_ms
-#define log_i       MPL_LOGI
-#define log_e       MPL_LOGE
+// #include "msp430.h"
+// #include "msp430_clock.h"
+// #include "log.h"
+#define i2c_write MPU_IIC_WriteRegister
+#define i2c_read MPU_IIC_WriteRegister
+#define delay_ms    HAL_Delay
+#define get_ms      MPU_GetTickCount
+#define log_i       usb_printf
+#define log_e       usb_printf
 
 #elif defined EMPL_TARGET_UC3L0
 /* Instead of using the standard TWI driver from the ASF library, we're using

@@ -56,6 +56,8 @@
 "onewheelrobot\usbd_ctlreq.o"
 "onewheelrobot\usbd_ioreq.o"
 "onewheelrobot\usbd_cdc.o"
+"onewheelrobot\inv_mpu.o"
+"onewheelrobot\inv_mpu_dmp_motion_driver.o"
 --strict --scatter "OneWheelRobot\OneWheelRobot.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

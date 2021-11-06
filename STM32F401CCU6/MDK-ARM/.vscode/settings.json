@@ -6,6 +6,11 @@
         "debug.h": "c",
         "stm32f4xx.h": "c",
         "mpu6050.h": "c",
-        "i2c.h": "c"
+        "i2c.h": "c",
+        "atomic": "cpp",
+        "cstdint": "cpp",
+        "inv_mpu.h": "c",
+        "dmpkey.h": "c",
+        "dmpmap.h": "c"
     }
 }

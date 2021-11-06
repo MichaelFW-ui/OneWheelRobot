@@ -24,6 +24,7 @@
 #include <math.h>
 #include "inv_mpu.h"
 #include "mpu6050.h"
+#include "usbd_cdc_if.h"
 
 /* The following functions must be defined for this platform:
  * i2c_write(unsigned char slave_addr, unsigned char reg_addr,
@@ -37,20 +38,7 @@
  * fabsf(float x)
  * min(int a, int b)
  */
-#ifdef EMPL_TARGET_STM32F401
-#include "i2c.h"
-#include "stm32f4xx.h"
-#include "debug.h"
-#define i2c_write MPU_IIC_ReadRegister
-#define i2c_read MPU_IIC_ReadRegister
-#define delay_ms HAL_Delay
-#define get_ms HAL_GetTick
-#define min(a,b) ((a<b)?a:b)
-#define log_i usb_printf("MPU6050 Information" ...)
-#define log_e usb_printf("MPU6050 Error" ...)
-
-
-#elif defined EMPL_TARGET_STM32F4
+#if defined EMPL_TARGET_STM32F4
 #include "./i2c/i2c.h"  
 #include "./systick/bsp_SysTick.h"
 #include "log.h"
@@ -84,22 +72,22 @@ static inline int reg_int_cb(struct int_param_s *int_param)
 #define fabs        fabsf
 #define min(a,b) ((a<b)?a:b)
 #elif defined EMPL_TARGET_MSP430
-#include "msp430.h"
-#include "msp430_i2c.h"
-#include "msp430_clock.h"
-#include "msp430_interrupt.h"
-#include "log.h"
-#define i2c_write   msp430_i2c_write
-#define i2c_read    msp430_i2c_read
-#define delay_ms    msp430_delay_ms
-#define get_ms      msp430_get_clock_ms
-static inline int reg_int_cb(struct int_param_s *int_param)
-{
-    return msp430_reg_int_cb(int_param->cb, int_param->pin, int_param->lp_exit,
-        int_param->active_low);
-}
-#define log_i       MPL_LOGI
-#define log_e       MPL_LOGE
+// #include "msp430.h"
+// #include "msp430_i2c.h"
+// #include "msp430_clock.h"
+// #include "msp430_interrupt.h"
+// #include "log.h"
+#define i2c_write MPU_IIC_WriteRegister
+#define i2c_read MPU_IIC_WriteRegister
+#define delay_ms    HAL_Delay
+#define get_ms      MPU_GetTickCount
+#define log_i       usb_printf
+#define log_e       usb_printf
+// static inline int reg_int_cb(struct int_param_s *int_param)
+// {
+//     return msp430_reg_int_cb(int_param->cb, int_param->pin, int_param->lp_exit,
+//         int_param->active_low);
+// }
 /* labs is already defined by TI's toolchain. */
 /* fabs is for doubles. fabsf is for floats. */
 #define fabs        fabsf
@@ -785,8 +773,8 @@ int mpu_init(struct int_param_s *int_param)
         return -1;
 
 #ifndef EMPL_TARGET_STM32F4    
-    if (int_param)
-        reg_int_cb(int_param);
+    // if (int_param)
+    //     reg_int_cb(int_param);
 #endif
 
 #ifdef AK89xx_SECONDARY
