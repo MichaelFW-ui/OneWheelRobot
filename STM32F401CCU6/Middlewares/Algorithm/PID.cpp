@@ -112,7 +112,7 @@ float myPID::Adjust()
 
   Error = Target - Current;
 
-  if (abs(Error) < DeadZone)
+  if (std::fabs(Error) < DeadZone)
   {
     Out = 0;
     return Out;
@@ -125,12 +125,12 @@ float myPID::Adjust()
 
 	/* PID with Changing integration rate */
 	float I_VarSpeedf = 0;
-	if (abs(Error) <= VarSpeed_I_B)
+	if (std::fabs(Error) <= VarSpeed_I_B)
 	  I_VarSpeedf = 1;
-	else if (abs(Error) <= double(VarSpeed_I_A) + VarSpeed_I_B)
-	  I_VarSpeedf = (VarSpeed_I_A - (abs(Error)) + VarSpeed_I_B) / VarSpeed_I_A;
+	else if (std::fabs(Error) <= double(VarSpeed_I_A) + VarSpeed_I_B)
+	  I_VarSpeedf = (VarSpeed_I_A - (std::fabs(Error)) + VarSpeed_I_B) / VarSpeed_I_A;
   
-  if(abs(Ki) > std::numeric_limits<float>::epsilon()){
+  if(std::fabs(Ki) > std::numeric_limits<float>::epsilon()){
     integral_e += I_VarSpeedf * Error * dt;
     /*Constrain*/
     integral_e = std_lib::constrain(integral_e, -I_Term_Max/Ki, I_Term_Max/Ki);
@@ -140,7 +140,7 @@ float myPID::Adjust()
   }
   
   /* Using Integral separation */
-  if (abs(Error) < I_SeparThresh)
+  if (std::fabs(Error) < I_SeparThresh)
   { 
     I_Term = Ki * integral_e;
     /*Constarin*/

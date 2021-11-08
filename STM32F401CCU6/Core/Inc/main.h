@@ -65,6 +65,7 @@ void Error_Handler(void);
 #define I2C1_MPU 1
 #define TIM1_PWMGenerate 1
 #define SPI1_NRF 1
+#define TIM9_MicroSecond 1
 #define NRF_IRQ_Pin GPIO_PIN_1
 #define NRF_IRQ_GPIO_Port GPIOA
 #define ESP_UART_TX_Pin GPIO_PIN_2

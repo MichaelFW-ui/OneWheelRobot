@@ -13,6 +13,7 @@
         "dmpkey.h": "c",
         "dmpmap.h": "c",
         "main.h": "c",
-        "limits": "cpp"
+        "limits": "cpp",
+        "sys_timer.h": "c"
     }
 }

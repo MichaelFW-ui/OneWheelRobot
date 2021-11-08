@@ -48,6 +48,7 @@
 "onewheelrobot\esp_com.o"
 "onewheelrobot\main_.o"
 "onewheelrobot\mpu6050.o"
+"onewheelrobot\sys_timer.o"
 "onewheelrobot\usb_device.o"
 "onewheelrobot\usbd_desc.o"
 "onewheelrobot\usbd_cdc_if.o"
