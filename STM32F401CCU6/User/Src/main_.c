@@ -18,7 +18,7 @@ int Main_Init(void) {
 }
 
 int Main_Debug(void) {
-
+    return 0;
 }
 
 int Main_Process(void) {

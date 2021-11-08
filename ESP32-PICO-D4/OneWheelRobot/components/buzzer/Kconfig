@@ -1,0 +1,10 @@
+menu "Buzzer config"
+
+    config BUZZER_GPIO_PIN
+        int "Buzzer pin number"
+        range 0 36
+        default 5
+        help
+            Choose the pin number that connects to the buzzer. Normally IO5 is connected.
+
+endmenu

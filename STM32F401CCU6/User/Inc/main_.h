@@ -9,7 +9,8 @@
  * 
  */
 
-#ifndef __MAIN_H
+#ifndef __MAIN__H
+#define __MAIN__H
 
 int Main_Init(void);
 

@@ -10,6 +10,7 @@
  */
 
 #ifndef __MPU6050_H
+#define __MPU6050_H
 
 #define EMPL_TARGET_MSP430
 #define MPU6050

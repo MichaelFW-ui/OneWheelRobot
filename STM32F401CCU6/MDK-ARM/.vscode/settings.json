@@ -11,6 +11,8 @@
         "cstdint": "cpp",
         "inv_mpu.h": "c",
         "dmpkey.h": "c",
-        "dmpmap.h": "c"
+        "dmpmap.h": "c",
+        "main.h": "c",
+        "limits": "cpp"
     }
 }
