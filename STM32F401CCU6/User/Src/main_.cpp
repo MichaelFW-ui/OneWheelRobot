@@ -11,6 +11,7 @@
 
 #include "main_.h"
 #include "debug.h"
+#include "sys_timer.h"
 
 int Main_Init(void) {
     Debug_Init();
@@ -23,4 +24,10 @@ int Main_Debug(void) {
 
 int Main_Process(void) {
     return 0;
+}
+
+void Main_TIM_ElapsedHandler(TIM_HandleTypeDef *htim) {
+  if (htim->Instance == SYS_MICRO_TIMER_HANDLE.Instance) {
+    SysTimer_PeriodElapsedCallback();
+  }
 }

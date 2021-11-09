@@ -15,6 +15,7 @@
 #include "stm32f4xx.h"
 #include "tim.h"
 
+
 extern uint32_t sys_timer_cnt;
 
 #define SYS_MICRO_TIMER_HANDLE htim9
@@ -29,6 +30,8 @@ __STATIC_INLINE uint32_t SysTimer_GetTick_Microseconds(void) {
 }
 
 void SysTimer_PeriodElapsedCallback(void);
+
+void SysTimer_Delay_us(uint32_t microseconds);
 
 
 #endif // !__SYS_TIMER_H

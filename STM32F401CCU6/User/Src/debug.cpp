@@ -10,8 +10,10 @@
  */
 
 #include "debug.h"
+#include "usbd_cdc_if.h"
 
 uint8_t RxDataBuffer[BUFFER_SIZE];
+
 
 void Debug_Main(void) {
     while (1) {

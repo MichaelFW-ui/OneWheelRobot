@@ -1190,34 +1190,39 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
-              <FileName>ctrl.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Src\ctrl.c</FilePath>
+              <FileName>motor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\motor.cpp</FilePath>
             </File>
             <File>
-              <FileName>debug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Src\debug.c</FilePath>
+              <FileName>main_.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\main_.cpp</FilePath>
             </File>
             <File>
-              <FileName>esp_com.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Src\esp_com.c</FilePath>
+              <FileName>ctrl.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\ctrl.cpp</FilePath>
             </File>
             <File>
-              <FileName>main_.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Src\main_.c</FilePath>
+              <FileName>debug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\debug.cpp</FilePath>
             </File>
             <File>
-              <FileName>mpu6050.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Src\mpu6050.c</FilePath>
+              <FileName>esp_com.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\esp_com.cpp</FilePath>
             </File>
             <File>
-              <FileName>sys_timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Src\sys_timer.c</FilePath>
+              <FileName>mpu6050.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\mpu6050.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>sys_timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\sys_timer.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1895,14 +1900,14 @@
           <GroupName>MPU</GroupName>
           <Files>
             <File>
-              <FileName>inv_mpu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\dmp\inv_mpu.c</FilePath>
+              <FileName>inv_mpu_dmp_motion_driver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\dmp\inv_mpu_dmp_motion_driver.cpp</FilePath>
             </File>
             <File>
-              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\dmp\inv_mpu_dmp_motion_driver.c</FilePath>
+              <FileName>inv_mpu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\dmp\inv_mpu.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -11,12 +11,24 @@
 
 #ifndef __MAIN__H
 #define __MAIN__H
+#include "tim.h"
+#include "stm32f4xx.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 int Main_Init(void);
 
 int Main_Debug(void);
 
 int Main_Process(void);
+
+void Main_TIM_ElapsedHandler(TIM_HandleTypeDef *htim);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // !__MAIN_H
 

@@ -14,10 +14,16 @@
 #define __DEBUG_H
 
 #include "stm32f4xx.h"
+#include "usbd_cdc_if.h"
+
 
 #define BUFFER_SIZE 256
 
 extern uint8_t RxDataBuffer[BUFFER_SIZE];
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 HAL_StatusTypeDef Debug_ProcessCommand(uint8_t *cmd);
 
@@ -27,5 +33,8 @@ void Debug_Init(void);
 
 void Debug_PrintAllArguments(void);
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif // !__DEBUG_H

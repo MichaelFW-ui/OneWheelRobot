@@ -14,6 +14,18 @@
         "dmpmap.h": "c",
         "main.h": "c",
         "limits": "cpp",
-        "sys_timer.h": "c"
-    }
+        "sys_timer.h": "c",
+        "cmsis_os.h": "c",
+        "motor.h": "c",
+        "pid.h": "c",
+        "stm32f4xx_it.h": "c",
+        "spi.h": "c",
+        "usbd_cdc_if.c": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "__config": "cpp",
+        "locale": "cpp",
+        "ostream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

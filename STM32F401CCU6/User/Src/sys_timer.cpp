@@ -16,3 +16,10 @@ void SysTimer_PeriodElapsedCallback(void) {
     ++sys_timer_cnt;
 }
 
+void SysTimer_Delay_us(uint32_t microseconds) {
+    uint32_t timer = SysTimer_GetTick_Microseconds();
+    while (SysTimer_GetTick_Microseconds() - timer < microseconds) {
+        ;
+    }
+}
+

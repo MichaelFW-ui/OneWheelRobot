@@ -29,7 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "sys_timer.h"
+#include "main_.h"
 
 /* USER CODE END Includes */
 
@@ -188,9 +188,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-  if (htim->Instance == SYS_MICRO_TIMER_HANDLE.Instance) {
-    SysTimer_PeriodElapsedCallback();
-  }
 
   /* USER CODE END Callback 1 */
 }
