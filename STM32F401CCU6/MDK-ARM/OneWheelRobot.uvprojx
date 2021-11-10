@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F401xC</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc; ../Drivers/STM32F4xx_HAL_Driver/Inc; ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy; ../Middlewares/Third_Party/FreeRTOS/Source/include; ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS; ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F; ../Drivers/CMSIS/Device/ST/STM32F4xx/Include; ../Drivers/CMSIS/Include; ..\User\Inc; ../USB_DEVICE/App; ../USB_DEVICE/Target; ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc; ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc; ..\User\dmp; ..\Middlewares\Algorithm</IncludePath>
+              <IncludePath>../Core/Inc;  ../Drivers/STM32F4xx_HAL_Driver/Inc;  ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;  ../Middlewares/Third_Party/FreeRTOS/Source/include;  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;  ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;  ../Drivers/CMSIS/Include;  ..\User\Inc;  ../USB_DEVICE/App;  ../USB_DEVICE/Target;  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;  ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;  ..\User\dmp;  ..\Middlewares\Algorithm</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1224,6 +1224,16 @@
               <FileType>8</FileType>
               <FilePath>..\User\Src\sys_timer.cpp</FilePath>
             </File>
+            <File>
+              <FileName>balance.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\balance.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_nrf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\User\Src\bsp_spi_nrf.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1928,6 +1938,16 @@
               <FileName>srml_std_lib.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Middlewares\Algorithm\srml_std_lib.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Doc</GroupName>
+          <Files>
+            <File>
+              <FileName>README.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\README.md</FilePath>
             </File>
           </Files>
         </Group>

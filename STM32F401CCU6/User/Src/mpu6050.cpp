@@ -16,6 +16,7 @@
 #include "dmpKey.h"
 #include "dmpmap.h"
 #include "math.h"
+#include "debug.h"
 
 static signed char gyro_orientation[9] = { 1, 0, 0,
                                            0, 1, 0,
@@ -199,3 +200,17 @@ uint8_t MPU_dmp_get_data(float *pitch, float *roll, float *yaw) {
     return 2;
   return 0;
 }
+
+HAL_StatusTypeDef MPU_Init(void) {
+    uint8_t ret = MPU_dmp_init();
+    if (ret != 0) {
+        usb_printf("Failed to initialize MPU6050.\r\n");
+        usb_printf("The device return with error code %d.\r\n", ret);
+        return HAL_ERROR;
+    }
+    return HAL_OK;
+}
+
+
+
+

@@ -50,6 +50,8 @@
 "onewheelrobot\esp_com.o"
 "onewheelrobot\mpu6050.o"
 "onewheelrobot\sys_timer.o"
+"onewheelrobot\balance.o"
+"onewheelrobot\bsp_spi_nrf.o"
 "onewheelrobot\usb_device.o"
 "onewheelrobot\usbd_desc.o"
 "onewheelrobot\usbd_cdc_if.o"

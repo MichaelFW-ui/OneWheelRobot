@@ -1,3 +1,12 @@
 # OneWheelRobot
 
-Class assignment or something.
+
+详细内容有待补充，现在只有大纲。
+
+## 介绍
+
+电子设计实践Ⅱ，自主设计实验内容。
+
+"自平衡独轮车"
+
+STM32，ESP32，Qt6上位机，WiFi通信。

@@ -29,7 +29,7 @@ HAL_StatusTypeDef Debug_ProcessCommand(uint8_t *cmd);
 
 void Debug_Main(void);
 
-void Debug_Init(void);
+HAL_StatusTypeDef Debug_Init(void);
 
 void Debug_PrintAllArguments(void);
 

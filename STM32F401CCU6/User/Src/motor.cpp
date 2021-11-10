@@ -21,7 +21,7 @@ MotorTypeDef::MotorTypeDef() {
 MotorTypeDef::MotorTypeDef(GPIO_TypeDef *DirA_GPIO_Port, uint16_t DirA_GPIO_Pin,
                            GPIO_TypeDef *DirB_GPIO_Port, uint16_t DirB_GPIO_Pin,
                            TIM_HandleTypeDef *TIM_Input_Handle,
-                           uint8_t InputChannel, GPIO_TypeDef Input_GPIO_Port,
+                           uint8_t InputChannel, GPIO_TypeDef *Input_GPIO_Port,
                            uint16_t Input_GPIO_Pin,
                            TIM_HandleTypeDef *TIM_Output_Handle,
                            uint8_t OutputChannel) {
@@ -48,7 +48,11 @@ void MotorTypeDef::PID_TimeConfigure(uint32_t (*getTick_fun)(void)) {
 }
 
 void MotorTypeDef::OnCapture(void) {
-    ++this->CaptureCnt;
+    if (this->Input_GPIO_Port->IDR | this->Input_GPIO_Pin) {
+        ++this->CaptureCnt;
+    } else {
+        --this->CaptureCnt;
+    }
 }
 
 void MotorTypeDef::OnPeriodicActivation(void) {

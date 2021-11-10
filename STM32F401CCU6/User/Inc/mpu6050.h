@@ -32,6 +32,7 @@ int MPU_GetTickCount(unsigned long *count);
 uint8_t MPU_run_self_test(void);
 uint8_t MPU_dmp_init(void);
 uint8_t MPU_dmp_get_data(float *pitch,float *roll,float *yaw);
+HAL_StatusTypeDef MPU_Init(void);
 
 #endif // !__MPU6050_H
 

@@ -11,6 +11,8 @@
 
 #include "debug.h"
 #include "usbd_cdc_if.h"
+#include "freertos.h"
+#include "cmsis_os.h"
 
 uint8_t RxDataBuffer[BUFFER_SIZE];
 
@@ -18,11 +20,13 @@ uint8_t RxDataBuffer[BUFFER_SIZE];
 void Debug_Main(void) {
     while (1) {
         ;
+        osDelay(1);
     }
 }
 
-void Debug_Init(void) {
-    return;
+HAL_StatusTypeDef Debug_Init(void) {
+    usb_printf("Debug section initializing\n");
+    return HAL_OK;
 }
 
 HAL_StatusTypeDef Debug_ProcessCommand(uint8_t *cmd) {

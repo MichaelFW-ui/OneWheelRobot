@@ -10,4 +10,4 @@ while True:
     if not inp:
         break
     open(os.path.join(inc, inp + '.h'), "w")
-    open(os.path.join(src, inp + '.c'), "w")
+    open(os.path.join(src, inp + '.cpp'), "w")

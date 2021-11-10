@@ -22,20 +22,20 @@ class MotorTypeDef{
     uint16_t DirB_GPIO_Pin;
     TIM_HandleTypeDef *TIM_Input_Handle;
     uint8_t InputChannel;
-    GPIO_TypeDef Input_GPIO_Port;
+    GPIO_TypeDef *Input_GPIO_Port;
     uint16_t Input_GPIO_Pin;
     TIM_HandleTypeDef *TIM_Output_Handle;
     uint8_t OutputChannel;
     myPID pid;
 
-    uint16_t CaptureCnt;
+    int32_t CaptureCnt;
     int32_t Output;
 public:
     MotorTypeDef();
     MotorTypeDef(GPIO_TypeDef *DirA_GPIO_Port, uint16_t DirA_GPIO_Pin,
                  GPIO_TypeDef *DirB_GPIO_Port, uint16_t DirB_GPIO_Pin,
                  TIM_HandleTypeDef *TIM_Input_Handle, uint8_t InputChannel,
-                 GPIO_TypeDef Input_GPIO_Port, uint16_t Input_GPIO_Pin,
+                 GPIO_TypeDef *Input_GPIO_Port, uint16_t Input_GPIO_Pin,
                  TIM_HandleTypeDef *TIM_Output_Handle, uint8_t OutputChannel);
     
     void PID_Configure(float _Kp, float _Ki, float _Kd, float _I_Term_Max, float _Out_Max);
