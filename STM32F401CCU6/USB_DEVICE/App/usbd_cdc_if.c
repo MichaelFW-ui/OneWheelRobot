@@ -276,7 +276,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
     temp.rxlen = temp.rxlen + (*Len);
     
     if(temp.rxlen < APP_RX_DATA_SIZE && UserRxBufferFS[temp.rxlen - 2] != 0x0d  \
-        &&  UserRxBufferFS[temp.rxlen - 1] != 0x0a)// 发�?�时每次发�?�必须以\r\n结尾
+        &&  UserRxBufferFS[temp.rxlen - 1] != 0x0a)// 发时每次发必须以\r\n结尾
     {
        //---继续接收---------------
        USBD_CDC_SetRxBuffer(&hUsbDeviceFS,UserRxBufferFS  + temp.rxlen); 
@@ -353,12 +353,12 @@ void usb_printf(const char *format, ...)
 }
 
 
-// 接收完成后�?�过usb回发数据
+// 接收完成后过usb回发数据
 HAL_StatusTypeDef rxdata_printf(void)
 {
   if(temp.flag)
   {
-    usb_printf("%s\r\n", UserRxBufferFS); // 若无�?回发，屏蔽即�?
+    usb_printf("%s\r\n", UserRxBufferFS); // 若无回发，屏蔽即
 
     Debug_ProcessCommand((uint8_t *)UserRxBufferFS);
 

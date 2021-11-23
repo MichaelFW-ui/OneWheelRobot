@@ -108,11 +108,11 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of MainMotionTask */
-  osThreadDef(MainMotionTask, StartMainTask, osPriorityNormal, 0, 128);
+  osThreadDef(MainMotionTask, StartMainTask, osPriorityHigh, 0, 256);
   MainMotionTaskHandle = osThreadCreate(osThread(MainMotionTask), NULL);
 
   /* definition and creation of CommandReceive */
-  osThreadDef(CommandReceive, StartReceiving, osPriorityIdle, 0, 128);
+  osThreadDef(CommandReceive, StartReceiving, osPriorityIdle, 0, 256);
   CommandReceiveHandle = osThreadCreate(osThread(CommandReceive), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */

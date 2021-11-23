@@ -46,6 +46,9 @@ public:
 };
 
 
+extern MotorTypeDef *MotorUpper, *MotorLower;
+
+void Motor_Init(void);
 
 
 #endif // !__MOTOR_H

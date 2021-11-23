@@ -507,14 +507,21 @@ static struct dmp_s dmp = {
     .packet_length = 0
 };
 
+	#include "usbd_cdc_if.h"
+	#include "debug.h"
+
 /**
  *  @brief  Load the DMP with this image.
  *  @return 0 if successful.
  */
 int dmp_load_motion_driver_firmware(void)
 {
-    return mpu_load_firmware(DMP_CODE_SIZE, dmp_memory, sStartAddress,
+	int8_t ret;
+    ret =  mpu_load_firmware(DMP_CODE_SIZE, dmp_memory, sStartAddress,
         DMP_SAMPLE_RATE);
+
+	if (ret) usb_printf("DMP loaded with return code %d\r\n", ret);
+	return ret;
 }
 
 /**

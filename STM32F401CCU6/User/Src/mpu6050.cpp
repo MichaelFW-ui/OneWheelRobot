@@ -29,15 +29,15 @@ int MPU_GetTickCount(unsigned long *count) {
 }
 
 int MPU_IIC_WriteRegister(uint8_t slave_addr, uint8_t reg_addr, uint16_t len, uint8_t *data_ptr) {
-    HAL_StatusTypeDef ret = HAL_I2C_Mem_Write(&MPU_IIC_HANDLE, slave_addr, reg_addr, I2C_MEMADD_SIZE_8BIT, data_ptr, len, 0x00ff);
+    HAL_StatusTypeDef ret = HAL_I2C_Mem_Write(&MPU_IIC_HANDLE, slave_addr << 1, reg_addr, I2C_MEMADD_SIZE_8BIT, data_ptr, len, 0x00ff);
     if (ret == HAL_OK) {
         return 0;
     }
     return 1;
 }
 int MPU_IIC_ReadRegister(uint8_t slave_addr, uint8_t reg_addr, uint16_t len, uint8_t *data_ptr) {
-    HAL_StatusTypeDef ret = HAL_I2C_Mem_Read(&MPU_IIC_HANDLE, slave_addr, reg_addr, I2C_MEMADD_SIZE_8BIT, data_ptr, len, 0x00ff);
-    if (ret != HAL_OK) {
+    HAL_StatusTypeDef ret = HAL_I2C_Mem_Read(&MPU_IIC_HANDLE, slave_addr << 1, reg_addr, I2C_MEMADD_SIZE_8BIT, data_ptr, len, 0x00ff);
+    if (ret == HAL_OK) {
         return 0;
     }
     return 1;
@@ -129,7 +129,8 @@ uint8_t MPU_run_self_test(void) {
 uint8_t MPU_dmp_init(void) {
   uint8_t res = 0;
   struct int_param_s int_param;  //这个没什么用，就是为了能给他实参调用起来
-  if (mpu_init(&int_param) == 0) { //初始化MPU6050
+	int8_t pre;
+  if ((pre = mpu_init(&int_param)) == 0) { //初始化MPU6050
     res = mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL);  //设置所需要的传感器
     if (res) return 1;
     res = mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);  //设置FIFO
@@ -153,6 +154,7 @@ uint8_t MPU_dmp_init(void) {
     res = mpu_set_dmp_state(1);  //使能DMP
     if (res) return 9;
   } else {
+			usb_printf("MPU returned %d\r\n", pre);
       return 10;
   }
   return 0;
@@ -202,7 +204,22 @@ uint8_t MPU_dmp_get_data(float *pitch, float *roll, float *yaw) {
 }
 
 HAL_StatusTypeDef MPU_Init(void) {
-    uint8_t ret = MPU_dmp_init();
+	
+		unsigned char Re = 123;
+	uint8_t ret = 0;
+      ret = MPU_IIC_ReadRegister(0x68, 0x75, 1, &Re);    //读器件地址
+      if (Re != 0x68) {
+					usb_printf("MPU6050 ??? = %d\r\n",Re);
+          usb_printf("检测不到MPU6050模块，请检查模块与开发板的接线");
+					return HAL_ERROR;
+      } else {
+          usb_printf("MPU6050 ID = %d\r\n",Re);
+      }
+			if (ret) {
+				usb_printf("I2C not working\r\n");
+			}
+			
+   ret = MPU_dmp_init();
     if (ret != 0) {
         usb_printf("Failed to initialize MPU6050.\r\n");
         usb_printf("The device return with error code %d.\r\n", ret);

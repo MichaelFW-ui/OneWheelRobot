@@ -14,23 +14,18 @@
 #include "sys_timer.h"
 #include "mpu6050.h"
 #include "motor.h"
-#include "tim.h"
+#include "cmsis_os.h"
 
-MotorTypeDef *MotorUpper, *MotorLower;
 
 int Main_Init(void) {
+	HAL_StatusTypeDef ret;
     Debug_Init();
-    MPU_Init();
-    MotorUpper = new MotorTypeDef(
-        Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, Motor_AIN2_GPIO_Port, Motor_AIN1_Pin,
-        &htim2, HAL_TIM_ACTIVE_CHANNEL_1, Encoder_UpperSub_GPIO_Port,
-        Encoder_UpperSub_Pin, &htim1, TIM_CHANNEL_2);
-
-    MotorUpper =
-        new MotorTypeDef(Motor_BIN1_GPIO_Port, Motor_BIN1_Pin,
-                         Motor_BIN2_GPIO_Port, Motor_BIN1_Pin, &htim2,
-                         HAL_TIM_ACTIVE_CHANNEL_2, Encoder_LowerSub_GPIO_Port,
-                         Encoder_LowerSub_Pin, &htim1, TIM_CHANNEL_3);
+    // ret = MPU_Init();
+	while (MPU_Init() != HAL_OK) {
+		osDelay(200);
+	}
+    Motor_Init();
+    SysTimer_Init();
     return 0;
 }
 
@@ -39,6 +34,19 @@ int Main_Debug(void) {
 }
 
 int Main_Process(void) {
+		HAL_Delay(1500);
+    Main_Init();
+		float pitch, roll, yaw;
+		uint8_t ret = MPU_dmp_get_data(&pitch, &roll, &yaw);
+		while (1) {
+    ret = MPU_dmp_get_data(&pitch, &roll, &yaw);
+      if (ret) {
+        // usb_printf("Failed ret %d\r\n",ret );
+        continue;
+      }
+			usb_printf("%f, %f, %f", pitch, roll, yaw);
+			vTaskDelay(50);
+		}
     return 0;
 }
 
@@ -46,4 +54,12 @@ void Main_TIM_ElapsedHandler(TIM_HandleTypeDef *htim) {
   if (htim->Instance == SYS_MICRO_TIMER_HANDLE.Instance) {
     SysTimer_PeriodElapsedCallback();
   }
+  if (htim->Instance == SYS_PERIODIC_TIMER_HANDLE.Instance) {
+      Main_TIM_PeriodElapsedCallback();
+  }
+}
+
+// I Guess frequency == 1kHz.
+void Main_TIM_PeriodElapsedCallback(void) {
+    /****************TODO****************/
 }

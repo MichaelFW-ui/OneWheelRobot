@@ -19,8 +19,8 @@ uint8_t RxDataBuffer[BUFFER_SIZE];
 
 void Debug_Main(void) {
     while (1) {
-        ;
-        osDelay(1);
+			// usb_printf("Debug running\r\n");
+			vTaskDelay(100);
     }
 }
 

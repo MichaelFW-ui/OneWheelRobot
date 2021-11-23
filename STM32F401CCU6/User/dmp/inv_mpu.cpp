@@ -78,7 +78,7 @@ static inline int reg_int_cb(struct int_param_s *int_param)
 // #include "msp430_interrupt.h"
 // #include "log.h"
 #define i2c_write MPU_IIC_WriteRegister
-#define i2c_read MPU_IIC_WriteRegister
+#define i2c_read MPU_IIC_ReadRegister
 #define delay_ms    HAL_Delay
 #define get_ms      MPU_GetTickCount
 #define log_i       usb_printf
@@ -2737,7 +2737,8 @@ int mpu_run_self_test(long *gyro, long *accel)
     if (!compass_result)
         result |= 0x04;
 #else
-        result |= 0x04;
+        // result |= 0x04;
+		// No compass !
 #endif
 restore:
 #elif defined MPU6500
@@ -2849,7 +2850,7 @@ int mpu_load_firmware(unsigned short length, const unsigned char *firmware,
     unsigned short this_write;
     /* Must divide evenly into st.hw->bank_size to avoid bank crossings. */
 #define LOAD_CHUNK  (16)
-    unsigned char cur[LOAD_CHUNK], tmp[2];
+    unsigned char cur[LOAD_CHUNK] = {0}, tmp[2];
 
     if (st.chip_cfg.dmp_loaded)
         /* DMP should only be loaded once. */
@@ -2863,8 +2864,15 @@ int mpu_load_firmware(unsigned short length, const unsigned char *firmware,
             return -1;
         if (mpu_read_mem(ii, this_write, cur))
             return -1;
-        if (memcmp(firmware+ii, cur, this_write))
-            return -2;
+         if (memcmp(firmware+ii, cur, this_write)) {
+					 for (int jj = 0; jj < this_write; ++jj) {
+						 usb_printf("%d -- AT %d: %d == %d\r\n", ii, jj, (firmware+ii)[jj], cur[jj]);
+						 HAL_Delay(1);
+					 }
+						return -2;
+				 }
+            
+				 // Bugs called here, but we trust the reality.
     }
 
     /* Set program start address. */

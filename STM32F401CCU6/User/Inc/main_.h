@@ -26,6 +26,8 @@ int Main_Process(void);
 
 void Main_TIM_ElapsedHandler(TIM_HandleTypeDef *htim);
 
+void Main_TIM_PeriodElapsedCallback(void);
+
 #ifdef __cplusplus
 }
 #endif
