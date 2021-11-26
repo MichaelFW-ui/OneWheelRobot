@@ -154,7 +154,7 @@
           <Type>0</Type>
           <LineNumber>94</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134251424</Address>
+          <Address>134251448</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -170,12 +170,32 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>htim9</ItemText>
+          <ItemText>MotorUpper</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>MotorLowerPID_Speed</ItemText>
+          <ItemText>MotorLower</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>AngleX</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>AngleY</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>SpeedX</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>SpeedY</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

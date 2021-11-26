@@ -30,7 +30,7 @@ typedef uint32_t (*SystemTick_Fun)(void);
 /* Private type --------------------------------------------------------------*/
 /* Exported macros -----------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
-class myPIDTimer
+class PIDTimer_TypeDef
 {
 public:
     static uint8_t getMicroTick_regist(uint32_t (*getTick_fun)(void));
@@ -64,11 +64,11 @@ public:
 /** 
 * @brief Class for traditional PID control.
 */
-class myPID : public myPIDTimer
+class PID_TypeDef : public PIDTimer_TypeDef
 {
 public:
-    myPID() {}
-    myPID(float _Kp, float _Ki, float _Kd) : Kp(_Kp), Ki(_Ki), Kd(_Kd){}
+    PID_TypeDef() {}
+    PID_TypeDef(float _Kp, float _Ki, float _Kd) : Kp(_Kp), Ki(_Ki), Kd(_Kd){}
     void SetPIDParam(float _Kp, float _Ki, float _Kd, float _I_Term_Max, float _Out_Max)
     {
       Kp = _Kp;
@@ -115,7 +115,7 @@ private:
 /** 
 * @brief Class for Fuzzy PID control.
 */
-class FuzzyPID : public myPIDTimer
+class FuzzyPID : public PIDTimer_TypeDef
 {
 public:
     float Adjust();

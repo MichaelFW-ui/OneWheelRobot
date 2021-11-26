@@ -48,25 +48,25 @@
 
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-SystemTick_Fun myPIDTimer::Get_SystemTick = NULL;
+SystemTick_Fun PIDTimer_TypeDef::Get_SystemTick = NULL;
 
 /* Private type --------------------------------------------------------------*/
 /* Private function declarations ---------------------------------------------*/
 /* function prototypes -------------------------------------------------------*/
-uint8_t myPIDTimer::UpdataTimeStamp(void)
+uint8_t PIDTimer_TypeDef::UpdataTimeStamp(void)
 {
   uint32_t now_time;
   
   /*Check `Get_SystemTick` */
-  if(myPIDTimer::Get_SystemTick != NULL)
+  if(PIDTimer_TypeDef::Get_SystemTick != NULL)
   {
     /*Convert to system time*/
     if (last_time == 0)
     {
-      last_time = myPIDTimer::Get_SystemTick();
+      last_time = PIDTimer_TypeDef::Get_SystemTick();
       return 1;
     }
-    now_time = myPIDTimer::Get_SystemTick();
+    now_time = PIDTimer_TypeDef::Get_SystemTick();
 
     /*Overflow*/
     if (now_time < last_time)
@@ -93,18 +93,18 @@ uint8_t myPIDTimer::UpdataTimeStamp(void)
            0: error input param
  * @author
  */
-uint8_t myPIDTimer::getMicroTick_regist(uint32_t (*getTick_fun)(void))
+uint8_t PIDTimer_TypeDef::getMicroTick_regist(uint32_t (*getTick_fun)(void))
 {
   if(getTick_fun != NULL)
   {
-    myPIDTimer::Get_SystemTick = getTick_fun;
+    PIDTimer_TypeDef::Get_SystemTick = getTick_fun;
     return 1;
   }
   else 
     return 0;
 }
 
-float myPID::Adjust()
+float PID_TypeDef::Adjust()
 {
   /*Error time*/
   if (UpdataTimeStamp())

@@ -13,7 +13,6 @@
 #define __MOTOR_H
 
 #include "stm32f4xx.h"
-#include "PID.h"
 
 #define MOTOR_INPUT_CAPTURE_HANDLE htim2
 #define MOTOR_PWM_HANDLE htim1
@@ -30,8 +29,7 @@ struct MotorTypeDef{
     uint8_t OutputChannel;
     TIM_HandleTypeDef *TIM_Input_Handle;
     int32_t CaptureCnt;
-    int32_t Output;
-    int32_t Current;
+    int32_t CurrentSpeed;
 public:
     MotorTypeDef();
     MotorTypeDef(GPIO_TypeDef *DirA_GPIO_Port, uint16_t DirA_GPIO_Pin,
@@ -53,9 +51,9 @@ void Motor_PeriodElapsedCallback(MotorTypeDef *Motor);
 
 void Motor_InputCaptureCallback(MotorTypeDef *Motor);
 
-void Motor_PeriodicUpdate(MotorTypeDef *Motor);
-
 void Motor_PrintSpeed(void);
+
+void Motor_SetOutput(MotorTypeDef *Motor, float output);
 
 #endif // !__MOTOR_H
 
