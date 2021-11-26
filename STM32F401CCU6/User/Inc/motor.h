@@ -15,21 +15,23 @@
 #include "stm32f4xx.h"
 #include "PID.h"
 
-class MotorTypeDef{
+#define MOTOR_INPUT_CAPTURE_HANDLE htim2
+#define MOTOR_PWM_HANDLE htim1
+
+struct MotorTypeDef{
     GPIO_TypeDef *DirA_GPIO_Port;
     uint16_t DirA_GPIO_Pin;
     GPIO_TypeDef *DirB_GPIO_Port;
     uint16_t DirB_GPIO_Pin;
-    TIM_HandleTypeDef *TIM_Input_Handle;
     uint8_t InputChannel;
     GPIO_TypeDef *Input_GPIO_Port;
     uint16_t Input_GPIO_Pin;
     TIM_HandleTypeDef *TIM_Output_Handle;
     uint8_t OutputChannel;
-    myPID pid;
-
+    TIM_HandleTypeDef *TIM_Input_Handle;
     int32_t CaptureCnt;
     int32_t Output;
+    int32_t Current;
 public:
     MotorTypeDef();
     MotorTypeDef(GPIO_TypeDef *DirA_GPIO_Port, uint16_t DirA_GPIO_Pin,
@@ -37,19 +39,23 @@ public:
                  TIM_HandleTypeDef *TIM_Input_Handle, uint8_t InputChannel,
                  GPIO_TypeDef *Input_GPIO_Port, uint16_t Input_GPIO_Pin,
                  TIM_HandleTypeDef *TIM_Output_Handle, uint8_t OutputChannel);
-    
+};
     void PID_Configure(float _Kp, float _Ki, float _Kd, float _I_Term_Max, float _Out_Max);
     void PID_TimeConfigure(uint32_t (*getTick_fun)(void));
-    void OnCapture(void);
-    void OnPeriodicActivation(void);
     void SetTargetSpeed(int16_t target);
-};
-
 
 extern MotorTypeDef *MotorUpper, *MotorLower;
 
+
 void Motor_Init(void);
 
+void Motor_PeriodElapsedCallback(MotorTypeDef *Motor);
+
+void Motor_InputCaptureCallback(MotorTypeDef *Motor);
+
+void Motor_PeriodicUpdate(MotorTypeDef *Motor);
+
+void Motor_PrintSpeed(void);
 
 #endif // !__MOTOR_H
 

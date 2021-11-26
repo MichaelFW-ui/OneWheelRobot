@@ -26,7 +26,9 @@
         "__config": "cpp",
         "locale": "cpp",
         "ostream": "cpp",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "chrono": "cpp",
+        "functional": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

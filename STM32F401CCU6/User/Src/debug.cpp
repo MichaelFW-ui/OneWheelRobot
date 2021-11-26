@@ -16,12 +16,12 @@
 
 uint8_t RxDataBuffer[BUFFER_SIZE];
 
-
 void Debug_Main(void) {
-    while (1) {
-			// usb_printf("Debug running\r\n");
-			vTaskDelay(100);
-    }
+    uint16_t counter = 0;
+  while (1) {
+    usb_printf("Time %d : Debug running\r\n", counter++);
+    vTaskDelay(1000);
+  }
 }
 
 HAL_StatusTypeDef Debug_Init(void) {
