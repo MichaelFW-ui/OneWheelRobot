@@ -204,30 +204,30 @@ uint8_t MPU_dmp_get_data(float *pitch, float *roll, float *yaw) {
 }
 
 HAL_StatusTypeDef MPU_Init(void) {
-	
-		unsigned char Re = 123;
-	uint8_t ret = 0;
-      ret = MPU_IIC_ReadRegister(0x68, 0x75, 1, &Re);    //读器件地址
-      if (Re != 0x68) {
-					usb_printf("MPU6050 ??? = %d\r\n",Re);
-          usb_printf("检测不到MPU6050模块，请检查模块与开发板的接线");
-					return HAL_ERROR;
-      } else {
-          usb_printf("MPU6050 ID = %d\r\n",Re);
-      }
-			if (ret) {
-				usb_printf("I2C not working\r\n");
-			}
-			
-   ret = MPU_dmp_init();
-    if (ret != 0) {
-        usb_printf("Failed to initialize MPU6050.\r\n");
-        usb_printf("The device return with error code %d.\r\n", ret);
-        return HAL_ERROR;
+  unsigned char Re = 123;
+  uint8_t ret = 0;
+  ret = MPU_IIC_ReadRegister(0x68, 0x75, 1, &Re);  //读器件地址
+  if (ret) {
+    usb_printf("I2C NOT working\r\n");
+    return HAL_ERROR;
+  }
+  if (Re != 0x68) {
+    usb_printf("MPU6050 Returns %d\r\n", Re);
+    usb_printf("检测不到MPU6050，请重新上电，或者更换新的芯片。\r\n");
+    return HAL_ERROR;
+  } else {
+    usb_printf("MPU6050 ID = %x\r\n", Re);
+    usb_printf("MPU6050 正常运行，启动成功。\r\n");
+  }
+
+  ret = MPU_dmp_init();
+  if (ret != 0) {
+    usb_printf("MPU6050初始化失败.\r\n");
+    usb_printf("错误返回值为 %d.\r\n", ret);
+    if (ret == 8) {
+        usb_printf("请确保模块为水平放置，否则无法通过自检\r\n");
     }
-    return HAL_OK;
+    return HAL_ERROR;
+  }
+  return HAL_OK;
 }
-
-
-
-

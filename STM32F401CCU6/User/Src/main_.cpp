@@ -19,6 +19,8 @@
 #include "motor.h"
 #include "ctrl.h"
 
+float pitch, roll, yaw;
+
 uint8_t Initialized_all;
 
 int Main_Init(void) {
@@ -40,7 +42,6 @@ int Main_Debug(void) {
 
 
   // MPU6050 Test!!!
-  float pitch, roll, yaw;
   uint8_t ret = MPU_dmp_get_data(&pitch, &roll, &yaw);
   while (1) {
     ret = MPU_dmp_get_data(&pitch, &roll, &yaw);

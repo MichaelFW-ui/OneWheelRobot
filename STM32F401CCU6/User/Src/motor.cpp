@@ -68,7 +68,6 @@ void Motor_InputCaptureCallback(MotorTypeDef *Motor) {
         (BIG_INT / (((Motor->TIM_Input_Handle->Instance->CNT) - last +
                      65535 * Motor->CaptureCnt)));
     last = Motor->TIM_Input_Handle->Instance->CNT;
-    // Occured over there.
     Motor->CaptureCnt = 0;
   }
 
@@ -81,46 +80,6 @@ void Motor_InputCaptureCallback(MotorTypeDef *Motor) {
   }
 }
 
-// void Motor_PeriodicUpdate(MotorTypeDef *Motor) {
-//   /****************** Motor Upper Periodic Update *****************************/
-//   if (Motor == MotorUpper) {
-//       MotorUpperPID.Target = MotorUpper_Speed;
-//     /* TODO */
-//   }
-
-//   /****************** Motor Lower Periodic Update *****************************/
-
-//   if (Motor == MotorLower) {
-//     MotorLowerPID_Speed.Target = MotorLower_Speed;
-
-//     Motor->Current = Motor->CaptureCnt;
-//     Motor->CaptureCnt = 0;
-//     static uint32_t MotorLowerCount = 0;
-//     if (!(MotorLowerCount % 2)) {
-//       MotorLowerPID_Speed.Current = Motor->Current;
-// 			// usb_printf("%d\r\n", Motor->Current);
-//       MotorLowerPID_Speed.Adjust();
-//       if (Motor->Output > 0) {
-//         Motor->DirB_GPIO_Port->ODR &= ~Motor->DirB_GPIO_Pin;
-//         SysTimer_Delay_us(10);
-//         Motor->DirA_GPIO_Port->ODR |= Motor->DirA_GPIO_Pin;
-//         __HAL_TIM_SetCompare(Motor->TIM_Output_Handle, Motor->OutputChannel,
-//                              (uint32_t)Motor->Output);
-//       } else {
-//         Motor->DirA_GPIO_Port->ODR &= ~Motor->DirA_GPIO_Pin;
-//         SysTimer_Delay_us(10);
-//         Motor->DirB_GPIO_Port->ODR |= Motor->DirB_GPIO_Pin;
-//         __HAL_TIM_SetCompare(Motor->TIM_Output_Handle, Motor->OutputChannel,
-//                              (uint32_t)(-Motor->Output));
-//       }
-//     }
-//     if (!(MotorLowerCount % 4) && MotorLowerPosition_Enable) {
-//       MotorLowerPID_Position.Target = MotorLower_Position;
-//       /*TODO Position*/
-//     }
-//     ++MotorLowerCount;
-//   }
-// }
 
 void Motor_PrintSpeed(void) {
     usb_printf("Upper: %f\r\n", MotorUpper->CurrentSpeed);
@@ -131,13 +90,13 @@ void Motor_PrintSpeed(void) {
 void Motor_Init(void) {
   MotorUpper = new MotorTypeDef(
       Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, Motor_BIN2_GPIO_Port,
-      Motor_BIN1_Pin, &htim2, HAL_TIM_ACTIVE_CHANNEL_1,
+      Motor_BIN2_Pin, &htim2, HAL_TIM_ACTIVE_CHANNEL_1,
       Encoder_UpperSub_GPIO_Port, Encoder_UpperSub_Pin, &htim1, TIM_CHANNEL_2);
 
 
   MotorLower = new MotorTypeDef(
       Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, Motor_AIN2_GPIO_Port,
-      Motor_AIN1_Pin, &htim2, HAL_TIM_ACTIVE_CHANNEL_2,
+      Motor_AIN2_Pin, &htim2, HAL_TIM_ACTIVE_CHANNEL_2,
       Encoder_LowerSub_GPIO_Port, Encoder_LowerSub_Pin, &htim1, TIM_CHANNEL_3);
 
   HAL_TIM_Base_Start_IT(&htim2);
@@ -159,7 +118,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 }
 
 void Motor_SetOutput(MotorTypeDef *Motor, float output) {
-  if (output > 0) {
+  if (output >= 0) {
     if (output > 1000) output = 1000;
     Motor->DirB_GPIO_Port->ODR &= ~Motor->DirB_GPIO_Pin;
     SysTimer_Delay_us(10);
@@ -172,6 +131,6 @@ void Motor_SetOutput(MotorTypeDef *Motor, float output) {
     SysTimer_Delay_us(10);
     Motor->DirB_GPIO_Port->ODR |= Motor->DirB_GPIO_Pin;
     __HAL_TIM_SetCompare(Motor->TIM_Output_Handle, Motor->OutputChannel,
-                         ((uint32_t)output));
+                         ((uint32_t)-output));
   }
 }

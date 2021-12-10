@@ -14,6 +14,8 @@
 #include "tim.h"
 #include "stm32f4xx.h"
 
+extern float pitch, roll, yaw;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

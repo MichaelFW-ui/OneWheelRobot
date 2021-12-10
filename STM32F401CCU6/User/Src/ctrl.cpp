@@ -19,6 +19,8 @@
 #include "stm32f4xx.h"
 #include "sys_timer.h"
 
+extern float pitch, roll, yaw;
+
 PID_TypeDef AngleX, SpeedX, AngleY, SpeedY;
 
 // X -- roll, Y -- pitch
@@ -33,10 +35,12 @@ void Ctrl_Init(void) {
 
   DefaultAngle_X = roll, DefaultAngle_Y = pitch;
 
-  AngleX.SetPIDParam(0, 0, 0, 1000, 1000);
-  SpeedX.SetPIDParam(0, 0, 0, 1000, 1000);
-  AngleY.SetPIDParam(0, 0, 0, 1000, 1000);
-  SpeedY.SetPIDParam(0, 0, 0, 1000, 1000);
+  AngleX.SetPIDParam(-70, 0, 25, 900, 800);
+  SpeedX.SetPIDParam(0, 0, 0, 900, 800);
+  AngleY.SetPIDParam(20, 2, 20, 900, 800);
+  SpeedY.SetPIDParam(0, 0, 0, 900, 800);
+	AngleX.DeadZone = 1;
+	AngleY.DeadZone = 1;
   AngleX.getMicroTick_regist(SysTimer_GetTick_Microseconds);
   SpeedX.getMicroTick_regist(SysTimer_GetTick_Microseconds);
   AngleY.getMicroTick_regist(SysTimer_GetTick_Microseconds);
@@ -51,15 +55,20 @@ void Ctrl_SetTargetForwardSpeed(int32_t speed) { SpeedY.Target = speed; }
  */
 void Ctrl_PeriodicCompute(void) {
   static uint8_t cnt = 0;
+	
+	// 200Hz
+	{
+		Ctrl_PID_Angle_X();
+    Motor_SetOutput(MotorUpper, AngleX.Out);
+		// Motor_SetOutput(MotorUpper, -300);
+    Ctrl_PID_Angle_Y();
+		// Motor_SetOutput(MotorLower, -300);
+    Motor_SetOutput(MotorLower, AngleY.Out);	
+	}
 
   // 100Hz
   if (!(cnt % 2)) {
-    Ctrl_PID_Angle_X();
-    Motor_SetOutput(MotorUpper, AngleX.Out);
-		// Motor_SetOutput(MotorUpper, 500);
-    Ctrl_PID_Angle_Y();
-		Motor_SetOutput(MotorLower, 500);
-    //Motor_SetOutput(MotorLower, AngleY.Out);
+    
   }
   // 40Hz
   if (!(cnt % 5)) {
@@ -73,18 +82,19 @@ void Ctrl_PeriodicCompute(void) {
 }
 
 void Ctrl_PID_Angle_X(void) {
-    return;
-  float pitch, roll, yaw;
-  while (MPU_dmp_get_data(&pitch, &roll, &yaw))
-    ;
+  // return;
+  // float pitch, roll, yaw;
+  // while (MPU_dmp_get_data(&pitch, &roll, &yaw))
+    // ;
   AngleX.Current = roll;
+  AngleX.Adjust();
 }
 
 void Ctrl_PID_Angle_Y(void) {
-    return;
-  float pitch, roll, yaw;
-  while (MPU_dmp_get_data(&pitch, &roll, &yaw))
-    ;
+	// return;
+  // float pitch, roll, yaw;
+  // while (MPU_dmp_get_data(&pitch, &roll, &yaw))
+  //  ;
   AngleY.Current = pitch;
   AngleY.Adjust();
 }
