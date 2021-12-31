@@ -39,17 +39,34 @@ int Main_Init(void) {
 }
 
 int Main_Debug(void) {
-
+	static int cnt = 0;
+	#define NUMBER 2
+	float pitchs[NUMBER], rolls[NUMBER], yaws[NUMBER];
+	float pitch__, roll__, yaw__;
 
   // MPU6050 Test!!!
   uint8_t ret = MPU_dmp_get_data(&pitch, &roll, &yaw);
   while (1) {
-    ret = MPU_dmp_get_data(&pitch, &roll, &yaw);
+    ret = MPU_dmp_get_data(&(pitchs[cnt % NUMBER]), &(rolls[cnt % NUMBER]), &(yaws[cnt % NUMBER]));
     if (ret) {
       continue;
     }
-    usb_printf("%f, %f, %f\r\n", pitch, roll, yaw);
-    vTaskDelay(50);
+		pitch__ = 0;
+		roll__ = 0;
+		yaw__ = 0;
+		for(int i = 0; i < NUMBER; ++i) {
+			pitch__ += pitchs[i] / NUMBER;
+			roll__ += rolls[i] / NUMBER;
+			yaw__ += yaws[i] / NUMBER;
+		}
+		pitch = pitch__;
+		roll = roll__;
+		yaw = yaw__;
+		
+		if (!(cnt % 6))
+			usb_printf("%f,%f,%f,%d,%d\r\n", pitch, roll, yaw, MotorUpper->CurrentSpeed, MotorLower->CurrentSpeed);
+    vTaskDelay(3);
+		++cnt;
   }
   return 0;
 }

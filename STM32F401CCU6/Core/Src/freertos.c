@@ -51,7 +51,6 @@
 
 /* USER CODE END Variables */
 osThreadId MainMotionTaskHandle;
-osThreadId CommandReceiveHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -59,7 +58,6 @@ osThreadId CommandReceiveHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartMainTask(void const * argument);
-void StartReceiving(void const * argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -111,10 +109,6 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(MainMotionTask, StartMainTask, osPriorityHigh, 0, 1024);
   MainMotionTaskHandle = osThreadCreate(osThread(MainMotionTask), NULL);
 
-  /* definition and creation of CommandReceive */
-  osThreadDef(CommandReceive, StartReceiving, osPriorityIdle, 0, 1024);
-  CommandReceiveHandle = osThreadCreate(osThread(CommandReceive), NULL);
-
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -140,25 +134,6 @@ void StartMainTask(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartMainTask */
-}
-
-/* USER CODE BEGIN Header_StartReceiving */
-/**
-* @brief Function implementing the CommandReceive thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartReceiving */
-void StartReceiving(void const * argument)
-{
-  /* USER CODE BEGIN StartReceiving */
-  Debug_Main();
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END StartReceiving */
 }
 
 /* Private application code --------------------------------------------------*/

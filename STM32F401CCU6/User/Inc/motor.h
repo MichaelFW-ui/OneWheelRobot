@@ -31,6 +31,8 @@ struct MotorTypeDef{
     int32_t CaptureCnt;
     int32_t CurrentSpeed;
 public:
+	
+		int32_t Last;
     MotorTypeDef();
     MotorTypeDef(GPIO_TypeDef *DirA_GPIO_Port, uint16_t DirA_GPIO_Pin,
                  GPIO_TypeDef *DirB_GPIO_Port, uint16_t DirB_GPIO_Pin,

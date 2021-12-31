@@ -68,10 +68,10 @@ void Error_Handler(void);
 #define TIM9_MicroSecond 1
 #define NRF_IRQ_Pin GPIO_PIN_1
 #define NRF_IRQ_GPIO_Port GPIOA
-#define ESP_UART_TX_Pin GPIO_PIN_2
-#define ESP_UART_TX_GPIO_Port GPIOA
-#define ESP_UART_RX_Pin GPIO_PIN_3
-#define ESP_UART_RX_GPIO_Port GPIOA
+#define MotorUpper_PWM_Pin GPIO_PIN_2
+#define MotorUpper_PWM_GPIO_Port GPIOA
+#define MotorUpper_Direc_Pin GPIO_PIN_3
+#define MotorUpper_Direc_GPIO_Port GPIOA
 #define ESP_EN_Pin GPIO_PIN_4
 #define ESP_EN_GPIO_Port GPIOA
 #define NRF_SCK_Pin GPIO_PIN_5

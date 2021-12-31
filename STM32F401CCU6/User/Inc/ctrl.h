@@ -13,6 +13,7 @@
 #define __CTRL_H
 #include "stm32f4xx.h"
 
+
 void Ctrl_Init(void);
 
 void Ctrl_SetTargetForwardSpeed(int32_t speed);
@@ -26,5 +27,13 @@ void Ctrl_PID_Angle_Y(void);
 void Ctrl_PID_Speed_Y(void);
 
 void Ctrl_PeriodicCompute(void);
+
+void Ctrl_PID_MotorSpeed_Y(void);
+
+void Ctrl_PID_MotorSpeed_X(void);
+
+void Ctrl_SetMotorSpeedX(float speed);
+
+void Ctrl_SetMotorSpeedY(float speed);
 
 #endif // !__CTRL_H

@@ -40,14 +40,16 @@ MotorTypeDef::MotorTypeDef(GPIO_TypeDef *DirA_GPIO_Port, uint16_t DirA_GPIO_Pin,
   this->OutputChannel = OutputChannel;
   this->CaptureCnt = 0;
   this->CurrentSpeed = 0;
+	this->Last = 0;
 }
 
 void Motor_PeriodElapsedCallback(MotorTypeDef *Motor) {
-  if (Motor == MotorUpper) {
+  if (Motor == MotorUpper || Motor == MotorLower) {
     ++Motor->CaptureCnt;
-    if (Motor->CaptureCnt > 1) {
+    if (Motor->CaptureCnt > 4) {
       Motor->CurrentSpeed = 0;
     }
+    return;
   }
   if (Motor == MotorLower) {
     // Never called here
@@ -57,18 +59,18 @@ void Motor_PeriodElapsedCallback(MotorTypeDef *Motor) {
 #define BIG_INT ((1 << 30) - 1)
 
 void Motor_InputCaptureCallback(MotorTypeDef *Motor) {
-  if (Motor == MotorUpper) {
+  if (Motor == MotorUpper || Motor == MotorLower) {
     if (Motor->Input_GPIO_Port->IDR & Motor->Input_GPIO_Pin) {
       Motor->CurrentSpeed = 1;
     } else {
       Motor->CurrentSpeed = -1;
     }
-    static uint32_t last = 0;
     Motor->CurrentSpeed *=
-        (BIG_INT / (((Motor->TIM_Input_Handle->Instance->CNT) - last +
+        (BIG_INT / (((Motor->TIM_Input_Handle->Instance->CNT) - Motor->Last +
                      65535 * Motor->CaptureCnt)));
-    last = Motor->TIM_Input_Handle->Instance->CNT;
+    Motor->Last = Motor->TIM_Input_Handle->Instance->CNT;
     Motor->CaptureCnt = 0;
+    return;
   }
 
   if (Motor == MotorLower) {
@@ -89,7 +91,8 @@ void Motor_PrintSpeed(void) {
 
 void Motor_Init(void) {
   MotorUpper = new MotorTypeDef(
-      Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, Motor_BIN2_GPIO_Port,
+      // MotorUpper_Direc_GPIO_Port, MotorUpper_Direc_Pin, Motor_BIN2_GPIO_Port,
+			Motor_BIN1_GPIO_Port, Motor_BIN1_Pin, Motor_BIN2_GPIO_Port,
       Motor_BIN2_Pin, &htim2, HAL_TIM_ACTIVE_CHANNEL_1,
       Encoder_UpperSub_GPIO_Port, Encoder_UpperSub_Pin, &htim1, TIM_CHANNEL_2);
 
@@ -98,6 +101,8 @@ void Motor_Init(void) {
       Motor_AIN1_GPIO_Port, Motor_AIN1_Pin, Motor_AIN2_GPIO_Port,
       Motor_AIN2_Pin, &htim2, HAL_TIM_ACTIVE_CHANNEL_2,
       Encoder_LowerSub_GPIO_Port, Encoder_LowerSub_Pin, &htim1, TIM_CHANNEL_3);
+	
+
 
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
@@ -133,4 +138,11 @@ void Motor_SetOutput(MotorTypeDef *Motor, float output) {
     __HAL_TIM_SetCompare(Motor->TIM_Output_Handle, Motor->OutputChannel,
                          ((uint32_t)-output));
   }
+	#define MINMIN 40
+	if (output > -MINMIN && output < MINMIN) {
+		Motor->DirA_GPIO_Port->ODR &= ~Motor->DirA_GPIO_Pin;
+    Motor->DirB_GPIO_Port->ODR &= ~Motor->DirB_GPIO_Pin;
+    __HAL_TIM_SetCompare(Motor->TIM_Output_Handle, Motor->OutputChannel,
+                         0);
+	}
 }

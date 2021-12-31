@@ -85,7 +85,7 @@ public:
     float I_Term_Max = 0;        /*<! I项限幅 */
     float Out_Max = 0;           /*<! 输出限幅 */
 	
-	float I_Term = 0;			/* 积分器输出 */
+		float I_Term = 0;			/* 积分器输出 */
     float P_Term = 0;			/* 比例器输出 */
     float D_Term = 0;			/* 微分器输出 */
 
